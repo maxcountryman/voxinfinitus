@@ -1,0 +1,10 @@
+<uwsgi>
+     <pythonpath>/usr/local/django/iukkoth_voxi/</pythonpath>
+     <pythonpath>/usr/local/django/</pythonpath>
+     <env>DJANGO_SETTINGS_MODULE=iukkoth_vox.settings</env>
+     <module>django.core.handlers.wsgi.WSGIHandler()</module>
+     <master/>
+     <processes>6</processes>
+     <socket>/tmp/cherokee/iukkoth_voxi.sock</socket>
+     <chmod/>
+</uwsgi>
