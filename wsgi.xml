@@ -2,7 +2,7 @@
      <home>/srv/python-environments/voxinfinitus/</home>
      <pythonpath>/srv/python-environments/voxinfinitus/</pythonpath>
      <pythonpath>/srv/python-environments/</pythonpath>
-     <env>DJANGO_SETTINGS_MODULE=settings</env>
+     <env>DJANGO_SETTINGS_MODULE=voxinfinitus.settings</env>
      <module>django.core.handlers.wsgi.WSGIHandler()</module>
      <master/>
      <processes>6</processes>
