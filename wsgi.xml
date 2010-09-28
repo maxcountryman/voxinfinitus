@@ -1,7 +1,7 @@
 <uwsgi>
+     <home>/srv/python-environments/voxinfinitus/</home>
      <pythonpath>/srv/python-environments/voxinfinitus/</pythonpath>
      <pythonpath>/srv/python-environments/</pythonpath>
-     <home>/srv/python-environments/voxinfinitus/</home>
      <env>DJANGO_SETTINGS_MODULE=settings</env>
      <module>django.core.handlers.wsgi.WSGIHandler()</module>
      <master/>
