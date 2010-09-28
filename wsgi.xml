@@ -1,11 +1,11 @@
 <uwsgi>
-     <home>/srv/python-environments/voxinfinitus</home>
-     <pythonpath>/srv/python-environments/voxinfinitus/</pythonpath>
-     <pythonpath>/srv/python-environments/</pythonpath>
-     <env>DJANGO_SETTINGS_MODULE=voxinfinitus.settings</env>
-     <module>django.core.handlers.wsgi.WSGIHandler()</module>
-     <master/>
-     <processes>6</processes>
-     <socket>/tmp/cherokee/voxi-live.sock</socket>
-     <chmod/>
+    <home>/srv/python-environments/voxinfinitus</home>
+    <pythonpath>/srv/python-environments/voxinfinitus/</pythonpath>
+    <pythonpath>/srv/python-environments/</pythonpath>
+    <env>DJANGO_SETTINGS_MODULE=voxinfinitus.settings</env>
+    <module>django_wsgi</module>
+    <master/>
+    <processes>6</processes>
+    <socket>/tmp/cherokee/voxi-live.sock</socket>
+    <chmod/>
 </uwsgi>
