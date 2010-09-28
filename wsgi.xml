@@ -1,5 +1,5 @@
 <uwsgi>
-     <home>/srv/python-environments/voxinfinitus/</home>
+     <home>/srv/python-environments/voxinfinitus</home>
      <pythonpath>/srv/python-environments/voxinfinitus/</pythonpath>
      <pythonpath>/srv/python-environments/</pythonpath>
      <env>DJANGO_SETTINGS_MODULE=voxinfinitus.settings</env>
