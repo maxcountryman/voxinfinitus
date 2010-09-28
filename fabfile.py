@@ -1,15 +1,22 @@
-from __future__ import with_statement
 from fabric.api import *
-from fabric.contrib.console import confirm
 
 env.hosts = ['arkham.voxinfinitus.net']
-
-def pack():
-    local('tar czf /tmp/my_project.tgz .', capture=False)
+env.project_path = '/srv/python-environments/voxinfinitus'
+env.socket_path = '/tmp/cherokee/'
 
 def deploy():
-    put('/tmp/my_project.tgz', '/tmp/')
-    with cd('/srv/django/my_project/'):
-        run('tar xzf /tmp/my_project.tgz')
-        run('touch app.wsgi')
+    "Push local changes to server, pull changes on server, destroy our socket"
+    local('git push origin master;')
+    run('cd %(project_path)s/; git pull origin master;' % env, pty=True)
+    refresh_socket()
+
+def refresh_socket():
+    "Refresh our socket, restart uWSGI"
+    run('rm %(socket_path)s/voxi-live.sock;' % env, pty=True)
+
+def ps_cherokee():
+    run("ps -e -O rss,pcpu | grep cherokee")
+
+def ps_wsgi():
+    run("ps -e -O rss,pcpu | grep uwsgi")
 
