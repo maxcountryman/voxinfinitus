@@ -3,9 +3,8 @@ import os
 PLATFORM = os.uname()[0]
 if PLATFORM == 'Darwin':
     DEBUG = True
-
 elif PLATFORM == 'Linux':
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = False
 
