@@ -13,7 +13,7 @@ def deploy():
 
 def refresh_socket():
     "Refresh our socket, restart uWSGI"
-    run('rm %(socket_path)s/voxi-live.sock' % env, pty=True)
+    run('sudo rm %(socket_path)s/voxi-live.sock' % env, pty=True)
 
 def restart_memcached():
     "Restart Memcached"
