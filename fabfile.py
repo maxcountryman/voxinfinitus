@@ -6,10 +6,15 @@ env.socket_path = '/tmp/cherokee'
 env.memcached_path ='/etc/rc.d/memcached' #this should be the init
 
 def deploy():
-    "Push local changes to server, pull changes on server, destroy our socket"
+    "Push local changes to GitHub, pull changes on server, destroy our socket"
     local('git push origin master;')
     run('cd %(project_path)s/; git pull origin master;' % env, pty=True)
+    refresh_settings()
     refresh_socket()
+
+def refresh_settings():
+    "Use scp to update our settings.py"
+    local('scp settings.py %(hosts)s:%(project_path)s/settings.py' % env)
 
 def refresh_socket():
     "Refresh our socket, restart uWSGI"
