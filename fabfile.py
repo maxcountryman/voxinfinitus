@@ -26,6 +26,9 @@ def pip_requirements():
 def ps_cherokee():
     run("ps -e -O rss,pcpu | grep cherokee")
 
+def ps_memcahced():
+    run("ps -e -O rss,pcpu | grep memcached")
+
 def ps_wsgi():
     run("ps -e -O rss,pcpu | grep uwsgi")
 
