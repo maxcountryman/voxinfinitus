@@ -11,22 +11,28 @@ class Author(models.Model):
         return "%s (%s)" % (self.name, self.email)
 
 class Post(models.Model):
-    title        = models.CharField(max_length=64)
-    slug         = models.SlugField(unique_for_date='date_published')
-    author       = models.ForeignKey(Author)
-    body         = models.TextField(blank=True)
-    tease        = models.TextField(blank=True, 
+    title = models.CharField(max_length=64)
+    slug = models.SlugField(unique_for_date='date_published')
+    author = models.ForeignKey(Author)
+    body = models.TextField(blank=True)
+    tease = models.TextField(blank=True, 
         help_text='A brief description of the post.')
     date_published = models.DateTimeField()
     date_modified = models.DateTimeField(auto_now=True)
-    tags = models.CharField(maxlength=200)
+    tags = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return "%s" % (self.title,)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('blog.views.show', (), {'post_url': self.slug, 
+                'year': self.date_published.year,
+                'month': '%02d' % self.date_published.month})
 
     def get_tag_list(self):
-        return re.split(" ", self.tags)    
+        return re.split(" ", self.tags,)    
     
-    def __unicode__(self):
-        return "%s (%s)" % (self.title,)
-
     class Meta:
         ordering = ["-date_published"]
-    
+
