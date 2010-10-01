@@ -1,7 +1,36 @@
 {% extends "base.html" %}
-
 {% block headerwrapper %}{% endblock %}
-
+{% block logowrapper %}
+    <div id="logo" class="fluid_grid_layout">
+      <div class="six_column section">
+        <div class="two column">
+          <div class="column_content">
+            {% block headerone %}{% endblock %}
+          </div>
+        </div>        
+        <div class="two column">
+          <div class="column_content">
+            {% block headertwo %}<h1><a href="/" title="Network Services for People Advocating Freedom of Expression">Vox Infinitus</a></h1>{% endblock %}
+          </div>
+        </div>
+        <div class="two column">
+          <div class="column_content">
+            {% block headerthree %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+{% block mainwrapper %}
+    <div id="main" class="fluid_grid_layout"> 
+      <div class="six_column section">
+        <div class="one column">
+          <div class="column_content">
+            {% block mainleftsidebar %}{% endblock %}
+          </div>
+        </div>
+        <div class="two column">
+          <div class="column_content">
 {% block maincontent_left %}
   <h2>The New Frontier</h2>
   <p>It's time we stood up and demanded our rights: with the dawn of the age of information technology we find ourselves in a new context within which our liberties presently have been greatly expanded. Now is 
@@ -13,7 +42,10 @@ government.</p>
   <p>These services are provided at absolutely no cost! That's right, our server time is your time at no cost to you. The only qualifying factor is that you use the resources to promote free expression. This may seem a bit 
 ambiguous, so check out our <a href="/services/" title="Network Services">services</a> page for a better description.</p>
 {% endblock %}
-
+          </div>                                                                                            
+        </div>
+        <div class="two column">
+          <div class="column_content">
 {% block maincontent_right %}
   <h2>Connect With the Community</h2>
   <p>As a public service open to everyone we maintain a robust, international <acronym class="button-info" title="Internet Relay Chat">IRC</acronym> network. Please feel free to drop by and say hi.</p>
@@ -23,8 +55,15 @@ irc.voxinfinitus.net on port 6667 or for SSL/TLS 6697.</p>
   <p>All connecting hostmasks are encrypted and displayed as a hash in order to preserve geolocational anonymity. We also offer a <a href="//voxinfinitus.net/participate/#tor">Tor hidden service</a> for truly anonymous 
 connections.</p>
 {% endblock %}
-
+          </div> 
+        </div>
+        <div class="one column">
+          <div class="column_content">
+            {% block mainrightsidebar %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
 {% block contentcenter %}
 {% endblock %}
-
-
