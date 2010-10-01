@@ -26,13 +26,12 @@
     <meta name="robots" content="all" />
     <link rel="stylesheet" href="//media.voxinfinitus.net/stylesheets/fluid.gs.css" type="text/css" media="screen" title="no title" charset="utf-8" />
     <!--[if lt IE 8]><link rel="stylesheet" href="//media.voxinfinitus.net/stylesheets/fluid.gs.lt_ie8.css" type="text/css" media="screen" title="no title" charset="utf-8" /><![endif]-->
-    <link rel="stylesheet" href="//media.voxinfinitus.net/stylesheets/voxi_main.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+    <link rel="stylesheet" href="//media.voxinfinitus.net/stylesheets/style.css" type="text/css" media="screen" title="no title" charset="utf-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
   </head>
 
   <body>
-
-{% block headerwrapper %}
+    {% block headerwrapper %}
     <div id="header" class="fluid_grid_layout">
       <div class="six_column section">
         <div class="six column">
@@ -42,57 +41,11 @@
         </div>
       </div>
     </div>
-{% endblock %}
-
-{% block logowrapper %}
-    <div id="logo" class="fluid_grid_layout">
-      <div class="six_column section">
-        <div class="two column">
-          <div class="column_content">
-            {% block headerone %}{% endblock %}
-          </div>
-        </div>        
-        <div class="two column">
-          <div class="column_content">
-            {% block headertwo %}<h1><a href="/" title="Network Services for People Advocating Freedom of Expression">Vox Infinitus</a></h1>{% endblock %}
-          </div>
-        </div>
-        <div class="two column">
-          <div class="column_content">
-            {% block headerthree %}{% endblock %}
-          </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
-
-{% block mainwrapper %}
-    <div id="main" class="fluid_grid_layout"> 
-      <div class="six_column section">
-        <div class="one column">
-          <div class="column_content">
-            {% block mainleftsidebar %}{% endblock %}
-          </div>
-        </div>
-        <div class="two column">
-          <div class="column_content">
-            {% block maincontent_left %}{% endblock %}
-          </div>                                                                                            
-        </div>
-        <div class="two column">
-          <div class="column_content">
-            {% block maincontent_right %}{% endblock %}
-          </div> 
-        </div>
-        <div class="one column">
-          <div class="column_content">
-            {% block mainrightsidebar %}{% endblock %}
-          </div>
-        </div>
-      </div>
-    </div>
-{% endblock %}
-
+    {% endblock %}
+    {% block logowrapper %}
+    {% endblock %}
+    {% block mainwrapper %}
+    {% endblock %}    
     <div id="content" class="fluid_grid_layout"> 
       <div class="six_column section">
         <div class="one column">
@@ -112,67 +65,60 @@
         </div>
       </div>
     </div>
-
-{% block footerwrapper %}
     <div id="footer" class="fluid_grid_layout">
       <div class="six_column section">
-          <div class="two column">
-            <div class="column_content">
-              {% block footerone %}
-                <h3>voxinfinitus.net</h3> 
-                <p>Content and styling is available by Creative Commons <a href="http://creativecommons.org/licenses/by-nc/3.0/" title="Creative Commons Attribution-NonCommercial 3.0">Attribution-NonCommercial</a> &mdash; 
-                Source available on <a href="http://github.com/max-countryman/voxinfinitus" title="Vox Infinitus Public Repo">GitHub</a> &mdash; 
-                <em>ex astris ad astra</em>.</p>
-              {% endblock %}
-            </div>
+        <div class="two column">
+          <div class="column_content">
+            {% block footerone %}
+              <h3>voxinfinitus.net</h3> 
+              <p>Content and styling is available by Creative Commons <a href="http://creativecommons.org/licenses/by-nc/3.0/" title="Creative Commons Attribution-NonCommercial 3.0">Attribution-NonCommercial</a> &mdash; 
+              Source available on <a href="http://github.com/max-countryman/voxinfinitus" title="Vox Infinitus Public Repo">GitHub</a> &mdash; 
+              <em>ex astris ad astra</em>.</p>
+            {% endblock %}
           </div>
-          <div class="one column">
-            <div class="column_content">
-              {% block footertwo %}{% endblock %}
-            </div>
+        </div>
+        <div class="one column">
+          <div class="column_content">
+            {% block footertwo %}{% endblock %}
           </div>
-          <div class="one column">
-            <div class="column_content">
-              {% block footerthree %}
-	        <h2>Discover</h2>
-                <ul class="navigation">
-                  <li><a href="/discover/#manifesto">Manifesto</a></li>
-    		  <li><a href="/discover/#policy">Policy</a></li>
-    		  <li><a href="/discover/#donate">Donate</a></li>
-  		</ul>
-              {% endblock %}
-            </div>
+        </div>
+        <div class="one column">
+          <div class="column_content">
+            {% block footerthree %}
+	          <h2>Discover</h2>
+              <ul>
+                <li><a href="/discover/#manifesto">Manifesto</a></li>
+    	  	    <li><a href="/discover/#policy">Policy</a></li>
+    	  	    <li><a href="/discover/#donate">Donate</a></li>
+  		      </ul>
+            {% endblock %}
           </div>
-          <div class="one column">
-            <div class="column_content">
-              {% block footerfour %}
-                <h2>Services</h2>
-                <ul class="navigation">
-                  <li><a href="/services/#hosting">Free Hosting</a></li>
-                  <li><a href="/services/#shell">Unix Shell</a></li>
-                  <li><a href="/services/#squid">Squid Proxy</a></li>
-                </ul>
-              {% endblock %}
-            </div>
+        </div>
+        <div class="one column">
+          <div class="column_content">
+            {% block footerfour %}
+              <h2>Services</h2>
+              <ul>
+                <li><a href="/services/#hosting">Free Hosting</a></li>
+                <li><a href="/services/#shell">Unix Shell</a></li>
+                <li><a href="/services/#squid">Squid Proxy</a></li>
+              </ul>
+            {% endblock %}
           </div>
-          <div class="one column">
-            <div class="column_content">
-	     {% block footerfive %}
-               <h2>Participate</h2>
-               <ul class="navigation">
-                 <li><a href="/participate/#feedback">Feedback</a></li>
-                 <li><a href="http://twitter.com/voxinfinitus">Twitter</a></li>
-                 <li class="connect"><a href="//chat.voxinfinitus.net/?randomnick=1&amp;channels=voxinfinitus">chat.voxinfinitus.net</a></li>
-               </ul>
-             {% endblock %}
-            </div>
+        </div>
+        <div class="one column">
+          <div class="column_content">
+	        {% block footerfive %}
+            <h2>Participate</h2>
+            <ul>
+              <li><a href="/participate/#feedback">Feedback</a></li>
+              <li><a href="http://twitter.com/voxinfinitus">Twitter</a></li>
+              <li class="connect"><a href="//chat.voxinfinitus.net/?randomnick=1&amp;channels=voxinfinitus">chat.voxinfinitus.net</a></li>
+            </ul>
+            {% endblock %}
           </div>
+        </div>
       </div>
     </div>
-{% endblock %}
-
-    {% block js %}
-    {% endblock %}
-
   </body>
 </html>
