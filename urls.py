@@ -12,10 +12,6 @@ urlpatterns = patterns('',
 
       (r'articles/', include('blog.urls')),
 
-      (r'^discover/', views.discover),
-      (r'^services/', views.services),
-      (r'^participate/', views.participate),
-
       (r'^$', 'views.landing'),
 )
 
