@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+{% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
+
+{% block extra-head %}
+{{ block.super }}
+<meta name="description" content="{{ post.body|striptags|truncatewords:20 }}" />
+{% endblock %}
+
+{% block content %}
+<div class="post">
+  {% include 'blog/post.html' %}
+</div>
+<div class="browse-posts">
+  <a href="../../">Browse all posts &raquo;</a>
+</div>
+{% endblock %}

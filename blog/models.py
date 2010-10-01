@@ -15,9 +15,7 @@ class Post(models.Model):
     slug = models.SlugField(unique_for_date='date_published')
     author = models.ForeignKey(Author)
     body = models.TextField(blank=True)
-    tease = models.TextField(blank=True, 
-        help_text='A brief description of the post.')
-    date_published = models.DateTimeField()
+    date_published = models.DateTimeField(auto_now=True)
     date_modified = models.DateTimeField(auto_now=True)
     tags = models.CharField(max_length=200)
 

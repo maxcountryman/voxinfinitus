@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+
+{% block extra-head %}
+{{ block.super }}
+<meta name="description" content="{{ blog.description|striptags|truncatewords:20 }}" />
+{% endblock %}
+
+{% block content %}
+{% for post in object_list %}
+  <div class="post post-in-list">
+    {% include 'blog/post.html' %}
+  </div>
+{% endfor %}
+
+<div class="pagenav">
+  {% if has_next %}
+    <a href="{{ request.path }}?page={{ next }}">&laquo; older</a>
+  {% endif %}
+  {% if has_previous %}
+    <a href="{{ request.path }}{% if previous != 1 %}?page={{ previous }}{% endif %}">newer &raquo;</a>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -3,14 +3,19 @@ from datetime import datetime
 from django.shortcuts import render_to_response, get_object_or_404
 from blog.models import Post
 from django.views.generic.simple import direct_to_template
+from django.views.generic.list_detail import object_list
+
+POSTS_PER_PAGE = 4
 
 def show(request, year, month, post_url):
+    year = int(year)
+    month = int(month)
     try:
-        start = datetime(int(year), int(month), 1)
+        start = datetime(year, month, 1)
         if month == 12:
-            end = datetime(int(year)+1, 1, 1)
+            end = datetime(year+1, 1, 1)
         else:
-            end = datetime(int(year), int(month)+1, 1)
+            end = datetime(year, month+1, 1)
     except ValueError:
         raise Http404('Date format incorrect')
     post = get_object_or_404(Post, slug=post_url, date_published__gte=start, 
@@ -19,7 +24,14 @@ def show(request, year, month, post_url):
 
 def show_post(request, post):
     recent_posts = Post.objects.filter()
-    recent_posts = recent_posts.order_by('-published_on')[:6]
+    recent_posts = recent_posts.order_by('-date_published')[:6]
 
-    return direct_to_template(request, 'post_detail.html',
+    return direct_to_template(request, 'blog/post_detail.html',
         {'post': post, 'recent_posts': recent_posts,})
+
+def browse(request):
+    query = Post.objects.filter()
+    query = query.order_by('-date_published')
+    return object_list(request, query, paginate_by=POSTS_PER_PAGE,
+        extra_context={'recent_posts': query[:6],
+                       'browse_posts': True})

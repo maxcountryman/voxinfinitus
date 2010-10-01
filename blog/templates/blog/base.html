@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block logowrapper %}{% endblock %}
+
+{% block mainwrapper %}{% endblock %}
+
+{{ block.super }}
+
+<div class="recent-blog-posts">
+<h2>Recent posts</h2>
+
+{% include 'blog/recent_posts.html' %}
+
+<a href="../../">Browse all posts &raquo;</a>
+</div>
+
