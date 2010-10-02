@@ -1,10 +1,18 @@
+{% load markup %}
+{% load comments %}
+{% get_comment_count for post as comment_count %}
 <h2 class="post"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
 <div class="post-meta">Posted on {{ post.date_published|date }}
 &mdash;
-<a href="{{ post.get_absolute_url }}">Permalink</a>
+<a href="{{ post.get_absolute_url }}">Comments</a> ({{ comment_count }})
+&mdash;
+<a href="http://twitter.com/share?url={{ site_base_url|urlencode }}{{ post.get_absolute_url|urlencode }}&count=vertical&text={{ post.title|urlencode }}{% if twitter_username %}&via={{ twitter_username|urlencode }}{% endif %}">Tweet</a>
 </div>
+<div class="post-meta">{% for tags in post.tags.get_query_set %} {{ tags.name }} {% endfor %}</div>
+
 {% if browse_posts %}
 {{ post.body|truncatewords_html:50 }}
 {% else %}
-{{ post.body }}
+{{ post.body|markdown }}
 {% endif %}
+

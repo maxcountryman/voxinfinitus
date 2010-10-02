@@ -2,6 +2,7 @@ import re
 from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
+from taggit.managers import TaggableManager
 
 class Author(models.Model):
     name = models.CharField(max_length=64)
@@ -17,20 +18,16 @@ class Post(models.Model):
     body = models.TextField(blank=True)
     date_published = models.DateTimeField(auto_now=True)
     date_modified = models.DateTimeField(auto_now=True)
-    tags = models.CharField(max_length=200)
-
-    def __unicode__(self):
-        return "%s" % (self.title,)
+    tags = TaggableManager()
 
     @models.permalink
     def get_absolute_url(self):
         return ('blog.views.show', (), {'post_url': self.slug, 
                 'year': self.date_published.year,
-                'month': '%02d' % self.date_published.month})
-
-    def get_tag_list(self):
-        return re.split(" ", self.tags,)    
+                'month': '%02d' % self.date_published.month}) 
     
     class Meta:
         ordering = ["-date_published"]
 
+    def __unicode__(self):
+        return "%s" % (self.title,)
