@@ -4,6 +4,9 @@ from django.shortcuts import render_to_response, get_object_or_404
 from blog.models import Post
 from django.views.generic.simple import direct_to_template
 from django.views.generic.list_detail import object_list
+from django.contrib.syndication.views import Feed
+from django.utils.feedgenerator import Atom1Feed
+
 
 POSTS_PER_PAGE = 6
 
@@ -36,3 +39,14 @@ def browse(request):
         extra_context={'recent_posts': query[:6],
                        'browse_posts': True})
 
+class RssNewsFeed(Feed):
+    title = "Vox Infinitus"
+    link = "/articles/"
+    description = "A feed of recent articles on VoxInfinitus.net."
+
+    def items(self):
+        return Post.objects.order_by('-date_published')[:5]
+
+class AtomNewsFeed(RssNewsFeed):
+    feed_type = Atom1Feed
+    subtitle = RssNewsFeed.description
