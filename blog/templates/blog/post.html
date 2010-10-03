@@ -14,7 +14,7 @@
 {% endfor %}
 </ul>
 <div class="post">
-{% if browse_posts %}
+{% if browse_posts|markdown %}
 {{ post.body|truncatewords_html:50 }}
 {% else %}
 {{ post.body|markdown }}
