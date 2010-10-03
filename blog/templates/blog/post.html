@@ -13,6 +13,7 @@
     <li><a class="tag" href="/articles/tag/{{ tags }}"><span>{{ tags.name }}</span></a></li>
 {% endfor %}
 </ul>
+<p></p>
 <div class="post">
 {% if browse_posts|markdown %}
 {{ post.body|truncatewords_html:50 }}
