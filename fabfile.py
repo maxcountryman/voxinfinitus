@@ -2,7 +2,7 @@ from fabric.api import *
 
 env.hosts = ['arkham.voxinfinitus.net']
 env.project_path = '/srv/python-environments/voxinfinitus'
-env.staging_path = '/home/max/voxinfintius'
+env.staging_path = '/home/max/voxinfinitus'
 env.socket_path = '/tmp/cherokee'
 env.memcached_path ='/etc/rc.d/memcached' #this should be the init
 
