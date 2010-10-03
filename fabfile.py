@@ -2,6 +2,7 @@ from fabric.api import *
 
 env.hosts = ['arkham.voxinfinitus.net']
 env.project_path = '/srv/python-environments/voxinfinitus'
+env.staging_path = '/home/max/voxinfintius'
 env.socket_path = '/tmp/cherokee'
 env.memcached_path ='/etc/rc.d/memcached' #this should be the init
 
@@ -12,9 +13,13 @@ def deploy():
     refresh_settings()
     refresh_socket()
 
+def staging():
+    "Pull changes from GitHub to the staging server"
+    run('cd %(staging_path)s/; git pull origin master;' % env, pty=True)
+
 def refresh_settings():
     "Use scp to update our settings.py"
-    local('scp settings.py %(hosts)s:%(project_path)s/settings.py' % env)
+#    local('scp settings.py %(hosts)s:%(project_path)s/settings.py' % env)
 
 def refresh_socket():
     "Refresh our socket, restart uWSGI"
