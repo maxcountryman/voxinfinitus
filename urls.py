@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.defaults import *
 import blog
 import taggit
-exec "from %s import views" % settings.PROJECT_DIR
+import views
 
 from django.contrib import admin
 admin.autodiscover()
@@ -13,6 +13,6 @@ urlpatterns = patterns('',
       (r'^comments/', include('django.contrib.comments.urls')),
       (r'^articles/', include('blog.urls')),
       (r'^articles/tag/(?P<slug>[^/]+)/$', 'taggit.views.tagged_object_list', 
-            dict(queryset=blog.models.Post.objects.all(),)),
+            dict(queryset=blog.models.Post.objects.all(),template_name='taggit/post_list.html')),
       (r'^$', 'views.landing'),
 )

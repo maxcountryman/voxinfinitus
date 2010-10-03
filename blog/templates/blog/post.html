@@ -4,15 +4,19 @@
 <h2 class="post"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
 <div class="post-meta">Posted on {{ post.date_published|date }}
 &mdash;
-<a href="{{ post.get_absolute_url }}">Comments</a> ({{ comment_count }})
+<a href="{{ post.get_absolute_url }}#comments">{% if comment_count != 0 %}{{ comment_count }}{% else %}No{% endif %} Comments</a>
 &mdash;
 <a href="http://twitter.com/share?url={{ site_base_url|urlencode }}{{ post.get_absolute_url|urlencode }}&count=vertical&text={{ post.title|urlencode }}{% if twitter_username %}&via={{ twitter_username|urlencode }}{% endif %}">Tweet</a>
 </div>
-<div class="post-meta">{% for tags in post.tags.get_query_set %} {{ tags.name }} {% endfor %}</div>
-
+<ul class="inline-tag-list">
+{% for tags in post.tags.get_query_set %} 
+    <li><a class="tag" href="/articles/tag/{{ tags }}"><span>{{ tags.name }}</span></a></li>
+{% endfor %}
+</ul>
+<div class="post">
 {% if browse_posts %}
 {{ post.body|truncatewords_html:50 }}
 {% else %}
 {{ post.body|markdown }}
 {% endif %}
-
+</div>

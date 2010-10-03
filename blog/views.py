@@ -36,9 +36,3 @@ def browse(request):
         extra_context={'recent_posts': query[:6],
                        'browse_posts': True})
 
-def browse_tagged_posts(request, tag):
-    query = Post.objects.filter(tags=tag)
-    query = query.order_by('-date_published')
-    return object_list(request, query, paginate_by=POSTS_PER_PAGE,
-        extra_context={'recent_posts': query[:6],
-                       'browse_posts': True})
