@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load comments %}
 {% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
 
 {% block extra-head %}
@@ -10,7 +11,21 @@
 <div class="post">
   {% include 'blog/post.html' %}
 </div>
-<div class="browse-posts">
+
+<h3>Post a Comment</h3>
+<div class="post-comment-form">
+    {% render_comment_form for post %}
+</div>
+<h3><a name="comments">Comments</a></h3>
+{% get_comment_list for post as cmt_list %}
+{% for comment in cmt_list %}
+<div class="post-comment">
+  <p><a href="{{ comment.user_url }}">{{ comment.user_name }}</a> - {{ comment.submit_date|date:"F j, Y" }}</p>
+    {{ comment.comment|linebreaks  }}
+</div>
+{% endfor %}
+
+<div class="pagenav">
   <a href="../../">Browse all posts &raquo;</a>
 </div>
 {% endblock %}

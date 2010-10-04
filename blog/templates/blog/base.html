@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}{{ blog.title }}{% endblock %}
-
-{% block logowrapper %}{% endblock %}
-
-{% block mainwrapper %}{% endblock %}
+{% block rel %}
+<link rel="alternate" type="application/rss+xml" href="{{ site_url }}/articles/rss" />
+<link rel="alternate" type="application/atom+xml" href="{{ site_url }}/articles/atom" />
+{% endblock %}
 
 {{ block.super }}
 
