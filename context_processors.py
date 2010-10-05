@@ -7,7 +7,7 @@ def settings_context(request):
     return {
         'site_name': settings.SITE_NAME,
         'site_description': settings.SITE_DESCRIPTION,
-        'site_copyright': settings.SITE_COPYRIGHT,
+        'site_authors': settings.SITE_AUTHORS,
         'site_base_url': base_url,
         'google_analytics_id': getattr(settings, 'GOOGLE_ANALYTICS_ID', None),
     }

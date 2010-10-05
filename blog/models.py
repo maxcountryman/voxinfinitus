@@ -1,9 +1,9 @@
 import re
+from django.contrib.sitemaps import ping_google, Sitemap
 from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
-from django.contrib.sitemaps import Sitemap
 
 class Blog(models.Model):
     name = models.CharField(max_length=64)
@@ -52,11 +52,18 @@ class Post(models.Model):
             self.published_on = datetime.now()
         elif self.date_published:
             self.date_modified = datetime.now()
-        super(Post, self).save(*args, **kwargs)       
-
+        super(Post, self).save(*args, **kwargs)
+        try:
+             ping_google(sitemap_url='/sitemap.xml')
+        except Exception:
+            # Bare 'except' because we could get a variety
+            # of HTTP-related exceptions.
+            pass
+        
     @models.permalink 
     def get_absolute_url(self):
         return ('blog.views.show', (), {'post_url': self.slug, 
+                'blog_url': self.blog.base_url,
                 'year': self.date_published.year,
                 'month': '%02d' % self.date_published.month}) 
     
@@ -70,7 +77,8 @@ class PostsSitemap(Sitemap):
     changefreq = "daily"
 
     def items(self):
-        return Post.objects.filter().order_by('-date_published')[:2000]
+        return Post.objects.filter().order_by('-date_published')[:50]
 
     def lastmod(self, obj):
-        return obj.last_update
+        return obj.date_modified
+
