@@ -12,11 +12,13 @@
   {% include 'blog/post.html' %}
 </div>
 
-<h3>Post a Comment</h3>
-<div class="post-comment-form">
-    {% render_comment_form for post %}
-</div>
-<h3><a name="comments">Comments</a></h3>
+{% get_comment_count for post as comment_count %}
+<h3>Discussion</h3>
+<a name="comments"></a>
+{% if not comment_count %}
+No comments yet... Yours could be the first!
+{% endif %}
+
 {% get_comment_list for post as cmt_list %}
 {% for comment in cmt_list %}
 <div class="post-comment">
@@ -24,6 +26,11 @@
     {{ comment.comment|linebreaks  }}
 </div>
 {% endfor %}
+
+<h3>Leave a Reply</h3>
+<div class="post-comment-form">
+    {% render_comment_form for post %}
+</div>
 
 <div class="pagenav">
   <a href="../../">Browse all posts &raquo;</a>

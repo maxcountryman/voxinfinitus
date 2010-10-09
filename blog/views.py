@@ -1,11 +1,13 @@
 import re
 from datetime import datetime
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from blog.models import Blog, Post
 from django.views.generic.simple import direct_to_template
 from django.views.generic.list_detail import object_list
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
+from django.contrib.comments import Comment
 
 POSTS_PER_PAGE = 6
 
@@ -40,6 +42,15 @@ def browse(request, blog_url):
         extra_context={'blog': blog, 'recent_posts': query[:6],
                        'browse_posts': True})
 
+def comment_posted(request):
+    if request.GET['c']:
+        comment_id = request.GET['c']
+        comment = Comment.objects.get(pk=comment_id)
+        post = Post.objects.get(id=comment.object_pk)
+        if post:
+            return HttpResponseRedirect(post.get_absolute_url())
+    return HttpResponseRedirect("/")
+
 class RssNewsFeed(Feed):
     title = "Vox Infinitus"
     link = "/articles/"
@@ -51,3 +62,4 @@ class RssNewsFeed(Feed):
 class AtomNewsFeed(RssNewsFeed):
     feed_type = Atom1Feed
     subtitle = RssNewsFeed.description
+

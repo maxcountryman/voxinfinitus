@@ -1,0 +1,12 @@
+*.pyc
+*.db
+.*
+bin/
+include/
+src/
+lib/
+build/
+settings.py
+templates/old static pages.zip
+style.css
+!.gitignore
