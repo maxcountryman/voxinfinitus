@@ -22,7 +22,7 @@ No comments yet... Yours could be the first!
 {% get_comment_list for post as cmt_list %}
 {% for comment in cmt_list %}
 <div class="post-comment">
-  <p><a href="{{ comment.user_url }}">{{ comment.user_name }}</a> - {{ comment.submit_date|date:"F j, Y" }}</p>
+  <a href="{{ comment.user_url }}">{{ comment.user_name }}</a> - {{ comment.submit_date|date:"F j, Y" }}
     {{ comment.comment|linebreaks  }}
 </div>
 {% endfor %}

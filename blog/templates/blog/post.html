@@ -10,11 +10,11 @@
 </div>
 <ul class="inline-tag-list">
 {% for tags in post.tags.get_query_set %} 
-    <li><a class="tag" href="/articles/tag/{{ tags }}"><span>{{ tags.name }}</span></a></li>
+    <li><a class="tag" href="/tag/{{ tags }}"><span>{{ tags.name }}</span></a></li>
 {% endfor %}
 </ul>
 <div class="post">
-{% if browse_posts %}
+{% if browse_posts or object_list %}
 {{ post.body|markdown|truncatewords_html:50 }}
 {% else %}
 {{ post.body|markdown }}

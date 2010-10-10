@@ -17,6 +17,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
       (r'^admin/doc/', include('django.contrib.admindocs.urls')),
       (r'^admin/', include(admin.site.urls)),
+      (r'^grappelli/', include('grappelli.urls')),
+      (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
       (r'^comments/posted/$', 'blog.views.comment_posted'),
       (r'^comments/', include('django.contrib.comments.urls')),
       (r'^blog/', include('blog.urls')),
