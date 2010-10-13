@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
+import utils
 
 class Blog(models.Model):
     name = models.CharField(max_length=64)
@@ -37,8 +38,7 @@ def default_blog():
 class Post(models.Model):
     blog = models.ForeignKey(Blog, related_name='posts',
         default=default_blog,
-        help_text="Changing the blog will also change the post's URL, so "
-                  "better don't change it for a published post.")
+        help_text='Changing this will affect URIs!')
     title = models.CharField(max_length=64)
     slug = models.SlugField(unique_for_date='date_published')
     author = models.ForeignKey(Author)
@@ -48,8 +48,10 @@ class Post(models.Model):
     tags = TaggableManager()
 
     def save(self, *args, **kwargs):
-        if not self.date_published:
+        if self.date_published is not None:
             self.published_on = datetime.now()
+            absolute_url = "http://voxinfinitus.net/" + self.get_absolute_url()
+            utils.tweet(self.title.encode(), absolute_url)
         elif self.date_published:
             self.date_modified = datetime.now()
         super(Post, self).save(*args, **kwargs)

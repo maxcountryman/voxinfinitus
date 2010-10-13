@@ -4,7 +4,7 @@
 
 {% block extra-head %}
 {{ block.super }}
-<meta name="description" content="{{ post.body|striptags|truncatewords:20 }}" />
+  <meta name="description" content="{{ post.body|striptags|truncatewords:20 }}">
 {% endblock %}
 
 {% block content %}
@@ -13,8 +13,8 @@
 </div>
 
 {% get_comment_count for post as comment_count %}
-<h3>Discussion</h3>
 <a name="comments"></a>
+<h3>Discussion</h3>
 {% if not comment_count %}
 No comments yet... Yours could be the first!
 {% endif %}
