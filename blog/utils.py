@@ -8,6 +8,8 @@ def tweet(title, uri):
     auth = tweepy.OAuthHandler(settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
     auth.set_access_token(settings.ACCESS_KEY, settings.ACCESS_SECRET)
     api = tweepy.API(auth)
+    if len(title) > 64:
+        title = title[:64] + "..."
     title = title + ' -- '
     post_update = title + short_url['url']
     status = api.update_status(post_update)
