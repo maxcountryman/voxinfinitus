@@ -1,22 +1,21 @@
 {% load markup %}
-{% load comments %}
-{% get_comment_count for post as comment_count %}
-<h2 class="post"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-<div class="post-meta">Posted {{ post.date_published|timesince }} ago
-&mdash;
-<a href="{{ post.get_absolute_url }}#comments">{% if comment_count != 0 %}{{ comment_count }}{% else %}No{% endif %} {% if comment_count != 1 %}Comments{% else %}Comment{% endif %}</a>
-&mdash;
-<a href="http://twitter.com/share?url={{ site_base_url|urlencode }}{{ post.get_absolute_url|urlencode }}&count=vertical&text={{ post.title|urlencode }}{% if twitter_username %}&via={{ twitter_username|urlencode }}{% endif %}">Tweet</a>
-</div>
-<ul class="inline-tag-list">
-{% for tags in post.tags.get_query_set %} 
+{% load disqus_tags %}
+{% if settings.DEGBUG %}{% disqus_dev %}{% endif %}
+<div class="post-date">{{ post.date_published|date }} {% if not browse_posts %}[<a href="{{ object.get_absolute_url }}#disqus_thread">Comments</a>]{% disqus_num_replies %}{% endif %}</div>
+<h2 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+{% if not browse_posts %}
+<div class="post-byline">By {{ post.author.name }}</div>
+<div id="post-tags">
+  <ul class="inline-tag-list">
+  {% for tags in post.tags.get_query_set %} 
     <li><a class="tag" href="/tag/{{ tags }}"><span>{{ tags.name }}</span></a></li>
-{% endfor %}
-</ul>
-<div class="post">
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
 {% if browse_posts or object_list %}
 {{ post.body|markdown|truncatewords_html:50 }}
 {% else %}
 {{ post.body|markdown }}
 {% endif %}
-</div>

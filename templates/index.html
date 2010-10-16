@@ -1,69 +1,34 @@
 {% extends "base.html" %}
-{% block headerwrapper %}{% endblock %}
-{% block logowrapper %}
-    <div id="logo" class="fluid_grid_layout">
-      <div class="six_column section">
-        <div class="two column">
-          <div class="column_content">
-            {% block headerone %}{% endblock %}
-          </div>
-        </div>        
-        <div class="two column">
-          <div class="column_content">
-            {% block headertwo %}<h1><a href="/" title="Network Services for People Advocating Freedom of Expression">Vox Infinitus</a></h1>{% endblock %}
-          </div>
-        </div>
-        <div class="two column">
-          <div class="column_content">
-            {% block headerthree %}{% endblock %}
-          </div>
-        </div>
-      </div>
-    </div>
-{% endblock %}
-{% block mainwrapper %}
-    <div id="main" class="fluid_grid_layout"> 
-      <div class="six_column section">
-        <div class="one column">
-          <div class="column_content">
-            {% block mainleftsidebar %}{% endblock %}
-          </div>
-        </div>
-        <div class="two column">
-          <div class="column_content">
-{% block maincontent_left %}
-  <h2>The New Frontier</h2>
-  <p>It's time we stood up and demanded our rights: with the dawn of the age of information technology we find ourselves in a new context within which our liberties presently have been greatly expanded. Now is 
-the time to ensure that our right of equal and fair access to information is not marginalized by corporate interests.</p>
-  <p><strong>Vox Infinitus</strong> provides <a href="/services/" title="Network Services">network services</a> to those seeking to encourage and solidfy equal and free access to information, protect freedom of expression, and 
-promote 
-transparency in 
-government.</p>
-  <p>These services are provided at absolutely no cost! That's right, our server time is your time at no cost to you. The only qualifying factor is that you use the resources to promote free expression. This may seem a bit 
-ambiguous, so check out our <a href="/services/" title="Network Services">services</a> page for a better description.</p>
-{% endblock %}
-          </div>                                                                                            
-        </div>
-        <div class="two column">
-          <div class="column_content">
-{% block maincontent_right %}
-  <h2>Connect With the Community</h2>
-  <p>As a public service open to everyone we maintain a robust, international <abbr title="Internet Relay Chat">IRC</abbr> network. Please feel free to drop by and say hi.</p>
-  <p class="feature">Webchat is available for easy connection at <a href="//chat.voxinfinitus.net/?randomnick=1&amp;channels=voxinfinitus" title="IRC Webchat">chat.voxinfinitus.net</a>. Alternatively direct your favorite IRC 
-client to 
-irc.voxinfinitus.net on port 6667 or for SSL/TLS 6697.</p>
-  <p>All connecting hostmasks are encrypted and displayed as a hash in order to preserve geolocational anonymity. We also offer a <a href="//voxinfinitus.net/participate/#tor">Tor hidden service</a> for truly anonymous 
-connections.</p>
-{% endblock %}
-          </div> 
-        </div>
-        <div class="one column">
-          <div class="column_content">
-            {% block mainrightsidebar %}{% endblock %}
-          </div>
-        </div>
-      </div>
-    </div>
-{% endblock %}
-{% block contentcenter %}
+{% block headerwrap %}{% endblock %}
+{% block content %}
+        <h1 id="logo">Vox Infinitus</h1>
+          
+        <h2>A Community</h2>
+          <p><strong>Vox Infinitus is a community</strong> for people seeking
+          to preserve freedom of expression, specifically in the context of
+          modern information technology.
+          </p>
+
+        <h3>The New Frontier?</h3>
+          <p>The Web is a bit of a new frontier, so to speak. However it has
+          already proved to be one of the most influential. In large part we
+          believe this is because of the unfettered access new ideas have had
+          to resources.          
+          </p>
+          <p>We think the Web is awesome! Seemingly its potential is
+          enormous. So we want to advocate for things that we believe will
+          maintain the qualities that have allowed the Internet to be what
+          it is today.
+          </p>
+
+        <h3>Internet Relay Chat</h3>
+          <p>IRC is the primary context in which our community happens. For
+          detailed connection instructions <a href="/about#irc">check out</a> 
+          the IRC section on the About page or use the Connect button
+          directly below to connect with the <a href="//chat.voxinfinitus.net/?randomnick=1&channels=voxinfinitus">Web interface</a>.
+          </p>
+          <p>All hostmasks are always encrypted, this means peers can't see
+          your IP. However if you prefer stronger anonymity, we do offer a
+          <a href="/about#tor">Tor</a> hidden service.
+          </p>
 {% endblock %}

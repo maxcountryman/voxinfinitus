@@ -1,5 +1,5 @@
 {% extends 'blog/base.html' %}
-{% load comments %}
+{% load disqus_tags %}
 {% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
 
 {% block extra-head %}
@@ -12,27 +12,12 @@
   {% include 'blog/post.html' %}
 </div>
 
-{% get_comment_count for post as comment_count %}
-<a name="comments"></a>
-<h3>Discussion</h3>
-{% if not comment_count %}
-No comments yet... Yours could be the first!
-{% endif %}
-
-{% get_comment_list for post as cmt_list %}
-{% for comment in cmt_list %}
-<div class="post-comment">
-  <a href="{{ comment.user_url }}">{{ comment.user_name }}</a> - {{ comment.submit_date|date:"F j, Y" }}
-    {{ comment.comment|linebreaks  }}
-</div>
-{% endfor %}
-
-<h3>Leave a Reply</h3>
-<div class="post-comment-form">
-    {% render_comment_form for post %}
+<div class="disqus">
+{% if settings.DEGBUG %}{% disqus_dev %}{% endif %}
+{% disqus_show_comments %}
 </div>
 
-<div class="pagenav">
-  <a href="../../">Browse all posts &raquo;</a>
+<div id="pagenav">
+  <a class="button" href="{{ blog.get_absolute_url }}">Browse all posts &raquo;</a>
 </div>
 {% endblock %}

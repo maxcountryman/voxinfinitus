@@ -5,6 +5,14 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
 import utils
+from django.conf import settings
+
+class Author(models.Model):
+    name = models.CharField(max_length=64)
+    email = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.name, self.email)
 
 class Blog(models.Model):
     name = models.CharField(max_length=64)
@@ -13,7 +21,7 @@ class Blog(models.Model):
                   'be below /blog/personal/...<br />'
                   'Slashes ("/") are not allowed in this field.')
     description = models.CharField(max_length=500, blank=True,
-        help_text='This will also be your feed description')
+        help_text='Used for meta info in our HTML')
 
     def __unicode__(self):
         return "%s" % (self.name)
@@ -21,13 +29,6 @@ class Blog(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('blog.views.show', (), {'blog_url': self.base_url})
-
-class Author(models.Model):
-    name = models.CharField(max_length=64)
-    email = models.CharField(max_length=64)
-
-    def __unicode__(self):
-        return "%s (%s)" % (self.name, self.email)
 
 def default_blog():
     blogs = Blog.objects.all()[:1]
@@ -46,12 +47,14 @@ class Post(models.Model):
     date_published = models.DateTimeField()
     date_modified = models.DateTimeField(auto_now=True)
     tags = TaggableManager()
+    tweet = models.BooleanField()
 
     def save(self, *args, **kwargs):
-        if self.date_published is not None:
-            self.published_on = datetime.now()
-            absolute_url = "http://voxinfinitus.net/" + self.get_absolute_url()
+        if self.date_modified is None and self.tweet is True:
+            absolute_url = settings.SITE_URL + self.get_absolute_url()
             utils.tweet(self.title.encode(), absolute_url)
+        if self.date_published is None:
+            self.date_published = datetime.now()
         elif self.date_published:
             self.date_modified = datetime.now()
         super(Post, self).save(*args, **kwargs)

@@ -12,12 +12,12 @@
   </div>
 {% endfor %}
 
-<div class="pagenav">
+<div id="pagenav">
   {% if has_next %}
-    <a href="{{ request.path }}?page={{ next }}">&laquo; older</a>
+    <a class="button" href="{{ request.path }}?page={{ next }}">&laquo; older</a>
   {% endif %}
   {% if has_previous %}
-    <a href="{{ request.path }}{% if previous != 1 %}?page={{ previous }}{% endif %}">newer &raquo;</a>
+    <a class="button" href="{{ request.path }}{% if previous != 1 %}?page={{ previous }}{% endif %}">newer &raquo;</a>
   {% endif %}
 </div>
 {% endblock %}

@@ -9,7 +9,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
 class PostAdmin(admin.ModelAdmin):
     search_fields = ('title',)
-    list_display = ('title', 'slug', 'author', 'body', 'date_published',)
+    list_display = ('title', 'slug', 'author', 'body', 'date_published', 'tweet',)
     prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(Blog, BlogAdmin)

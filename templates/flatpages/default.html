@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load markup %}
 {% block title %}{{ flatpage.title }}{% endblock %}
-
+{% block indexwrap %}{% endblock %}
 {% block content %}
 {{ flatpage.content|markdown}}
 {% endblock %}

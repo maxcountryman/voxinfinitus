@@ -3,20 +3,40 @@
 <head>
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1"><![endif]-->
+
   <title>{% if request.path != '/' %}{% block title %}{% endblock %} - {% endif %}{{ site_name }}</title>
+
   <meta name="robots" content="index, follow">
-  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
   {% block extra-head %}{% endblock %}
-  <link rel="shortcut icon" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">  
-  <link rel="stylesheet" media="screen" href="//media.voxinfinitus.net/stylesheets/fluid.gs.css">
-  <!--[if lt IE 8]><link rel="stylesheet" media="screen" href="//media.voxinfinitus.net/stylesheets/fluid.gs.lt_ie8.css"><![endif]-->
+  
+	<!--  iPhone/iPad/Opera Mobile Viewport Fix:
+	device-width : Make sure webpages occupy full width of the screen in its current orientation (portrait or landscape)
+	initial-scale = 1.0 retains dimensions of the page instead of zooming out if page height is larger than device height
+	maximum-scale = 1.0 retains dimensions of the page instead of zooming in if page width is smaller than device width
+	
+  More at: http://j.mp/mobileviewport
+           http://davidbcalhoun.com/2010/viewport-metatag 	 -->
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root of your domain
+       and delete these references -->
+  <link rel="shortcut icon" href="">
+	<link rel="apple-touch-icon" href="">
+
+
   <!-- CSS : implied media="all" -->
+  <link rel="stylesheet" href="//media.voxinfinitus.net/stylesheets/960.css">
   <link rel="stylesheet" href="//media.voxinfinitus.net/stylesheets/style.css">
   <!-- For the less-enabled mobile browsers like Opera Mini -->
   <link rel="stylesheet" media="handheld" href="//media.voxinfinitus.net/stylesheets/handheld.css">
+
   <!-- All JavaScript at the bottom, except for.. -->
   <script src="/js/modernizr-1.5.min.js"></script>
+
 </head>
 
 <!-- http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -28,95 +48,82 @@
 <!--[if gt IE 9]>  <body>             <![endif]-->
 <!--[if !IE]><!--> <body>         <!--<![endif]-->
 
-    {% block headerwrapper %}
-    <div id="header" class="fluid_grid_layout">
-      <div class="six_column section">
-        <div class="six column">
-          <div class="column_content">
-            <h1 class="header"><a href="/" title="Network Services for People Advocating Freedom of Expression">Vox Infinitus</a></h1>
+{% block headerwrap %}
+  <div id="header">
+    <div class="container_12">
+      <div class="grid_12">
+        {% block header %}<p id="headertext"><a class="headertext" title="Vox Infinitus" href="/">Vox Infinitus</a></p>{% endblock %}
+      </div>
+	  <!-- end .grid_12 -->
+	  <div class="clear"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block indexwrap %}
+  <div id="indexheader">
+    <div class="container_12">
+      <div class="grid_12">
+        {% block indexheader %}{% endblock %}
+      </div>
+	  <!-- end .grid_12 -->
+	  <div class="clear"></div>
+    </div>
+  </div>
+{% endblock %}
+
+  <div id="body">
+    <div class="container_12">
+      <div class="grid_12">
+        {% block content %}{% endblock %}
+      </div>
+	  <!-- end .grid_12 -->
+	  <div class="clear"></div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container_12">
+      <div class="grid_4">
+        <h2>VoxInfinitus.net</h2>
+        <p>Fork us on <a href="http://github.com/max-countryman/voxinfinitus">GitHub</a> &mdash; <em>ex astris ad astra.</em></p>
 	  </div>
-        </div>
+	  <!-- end .grid_4 -->
+      <div class="grid_4">
+        <p class="ir">This bit of text you're not supposed to see. So if 
+        you're reading this, congratulations, you've discovered something
+        that really shouldn't be here...
+        </p>
+	  </div>
+	  <!-- end .grid_4 -->
+      <div class="grid_2">
+        <h3>About Us</h3>
+          <ul>
+            <li><a href="/about">What is this?</a></li>
+            <li><a href="/about/#services">Things we do</a></li>
+            <li><a href="/about/#irc">The IRC network</a></li>
+          </ul>
       </div>
+	  <!-- end .grid_2 -->
+
+      <div class="grid_2">
+        <h3>Participate</h3>
+          <ul>
+            <li><a href="//twitter.com/voxinfinitus">Follow us on Twitter</a></li>
+            <li class="connect"><a href="//chat.voxinfinitus.net/?randomnick=1&amp;channels=voxinfinitus">chat.voxinfinitus.net</a></li>
+          </ul>
+      </div>
+	  <!-- end .grid_2 -->
+	  <div class="clear"></div>
     </div>
-    {% endblock %}
-    {% block logowrapper %}
-    {% endblock %}
-    {% block mainwrapper %}
-    {% endblock %}    
-    <div id="content" class="fluid_grid_layout"> 
-      <div class="six_column section">
-        <div class="one column">
-          <div class="column_content">
-            {% block contentleft %}{% endblock %}
-          </div>
-        </div>
-        <div class="four column">
-          <div class="column_content">
-            {% block contentcenter %} {% block content %}{% endblock %} {% endblock %}
-          </div>
-        </div> 
-        <div class="one column">
-          <div class="column_content">
-            {% block contentright %}{% endblock %}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="footer" class="fluid_grid_layout">
-      <div class="six_column section">
-        <div class="two column">
-          <div class="column_content">
-            {% block footerone %}
-              <h3>voxinfinitus.net</h3> 
-              <p>Content and styling is available by Creative Commons <a href="http://creativecommons.org/licenses/by-nc/3.0/" title="Creative Commons Attribution-NonCommercial 3.0">Attribution-NonCommercial</a> &mdash; 
-              Source available on <a href="http://github.com/max-countryman/voxinfinitus" title="Vox Infinitus Public Repo">GitHub</a> &mdash; 
-              <em>ex astris ad astra</em>.</p>
-            {% endblock %}
-          </div>
-        </div>
-        <div class="one column">
-          <div class="column_content">
-            {% block footertwo %}{% endblock %}
-          </div>
-        </div>
-        <div class="one column">
-          <div class="column_content">
-            {% block footerthree %}
-	          <h2>Discover</h2>
-              <ul>
-                <li><a href="/discover/#manifesto">Manifesto</a></li>
-    	  	    <li><a href="/discover/#policy">Policy</a></li>
-    	  	    <li><a href="/discover/#donate">Donate</a></li>
-  		      </ul>
-            {% endblock %}
-          </div>
-        </div>
-        <div class="one column">
-          <div class="column_content">
-            {% block footerfour %}
-              <h2>Services</h2>
-              <ul>
-                <li><a href="/services/#hosting">Free Hosting</a></li>
-                <li><a href="/services/#shell">Unix Shell</a></li>
-                <li><a href="/services/#squid">Squid Proxy</a></li>
-              </ul>
-            {% endblock %}
-          </div>
-        </div>
-        <div class="one column">
-          <div class="column_content">
-	        {% block footerfive %}
-            <h2>Participate</h2>
-            <ul>
-              <li><a href="/participate/#feedback">Feedback</a></li>
-              <li><a href="http://twitter.com/voxinfinitus">Twitter</a></li>
-              <li class="connect"><a href="//chat.voxinfinitus.net/?randomnick=1&amp;channels=voxinfinitus">chat.voxinfinitus.net</a></li>
-            </ul>
-            {% endblock %}
-          </div>
-        </div>
-      </div>
-    </div><!-- end of #container -->
+  </div>
+
+
+  <!-- JavaScript -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="../js/plugins.js"></script>
+  <script src="../js/script.js"></script>
+
       {% if google_analytics_id %}
         <script type="text/javascript">
         /* <![CDATA[ */
@@ -132,5 +139,11 @@
         /* ]]> */
         </script>
       {% endif %}
-  </body>
+
+  <!--[if lt IE 7 ]>
+    <script src="../js/dd_belatedpng.js"></script>
+  <![endif]-->
+
+
+</body>
 </html>
