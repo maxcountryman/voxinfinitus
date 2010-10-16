@@ -7,9 +7,7 @@
   <title>{% if request.path != '/' %}{% block title %}{% endblock %} - {% endif %}{{ site_name }}</title>
 
   <meta name="robots" content="index, follow">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
+  <meta name="author" content="{{ site_authors }}">
   {% block extra-head %}{% endblock %}
   
 	<!--  iPhone/iPad/Opera Mobile Viewport Fix:
