@@ -15,7 +15,7 @@
 {% endif %}
 
 {% if browse_posts or object_list %}
-<p>{{ post.body|truncatewords_html:50 }} <a href="{{ post.get_absolute_url }}">continue reading</a></p>
+{{ post.body|markdown|truncatewords_html:50|join:' <a href="{{ post.get_absolute_url }}">continue reading</a>' }} 
 {% else %}
 {{ post.body|markdown }}
 {% endif %}
