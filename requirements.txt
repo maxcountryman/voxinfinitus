@@ -1,10 +1,15 @@
 BeautifulSoup==3.1.0.1
 Django==1.2.3
 Markdown==2.0.3
+-e git://github.com/bitly/bitly-api-python.git@20d049ecd99a71badf842aea7ada0e4ea22b4b4c#egg=bitly_api-0.1.c-py2.6-dev
 distribute==0.6.14
+django-disqus==0.3.3
 django-grappelli==2.1
 django-taggit==0.9.1
 python-dateutil==1.5
 python-memcached==1.45
+python-twitter==0.6
+simplejson==2.1.1
+tweepy==1.7.1
 wsgiref==0.1.2
 yolk==0.4.1
