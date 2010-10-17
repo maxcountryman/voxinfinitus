@@ -44,18 +44,17 @@ class Post(models.Model):
     slug = models.SlugField(unique_for_date='date_published')
     author = models.ForeignKey(Author)
     body = models.TextField(blank=True)
-    date_published = models.DateTimeField()
-    date_modified = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField('Published', help_text='Mark here to publish')
+    date_published = models.DateTimeField(auto_now=True)
+    date_modified = None
     tags = TaggableManager()
-    tweet = models.BooleanField()
-
+    tweet = models.BooleanField('Tweet', help_text='Mark here to Tweet')
+    
     def save(self, *args, **kwargs):
-        if self.date_modified is None and self.tweet is True:
+        if self.date_modified is None and self.is_published is True and self.tweet is True:
             absolute_url = settings.SITE_URL + self.get_absolute_url()
             utils.tweet(self.title.encode(), absolute_url)
-        if self.date_published is None:
-            self.date_published = datetime.now()
-        elif self.date_published:
+        if self.date_published is not None and self.is_published is True:
             self.date_modified = datetime.now()
         super(Post, self).save(*args, **kwargs)
         try:

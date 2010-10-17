@@ -8,8 +8,8 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = ('name', 'email',)
 
 class PostAdmin(admin.ModelAdmin):
-    search_fields = ('title',)
-    list_display = ('title', 'slug', 'author', 'body', 'date_published', 'tweet',)
+    search_fields = ('title','author')
+    list_display = ('title', 'slug', 'author', 'body', 'date_published', 'is_published', 'tweet',)
     prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(Blog, BlogAdmin)

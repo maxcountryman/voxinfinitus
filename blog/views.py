@@ -23,12 +23,12 @@ def show(request, blog_url, year, month, post_url):
     except ValueError:
         raise Http404('Date format incorrect')
     blog = get_object_or_404(Blog, base_url=blog_url)
-    post = get_object_or_404(Post, slug=post_url, date_published__gte=start, 
-        date_published__lt=end)
+    post = get_object_or_404(Post, slug=post_url, is_published=True, date_published__gte=start, 
+        date_published__lt=end,)
     return show_post(request, blog, post)
 
 def show_post(request, blog, post):
-    recent_posts = Post.objects.filter(blog=blog)
+    recent_posts = Post.objects.filter(blog=blog, is_published=True,)
     recent_posts = recent_posts.order_by('-date_published')[:6]
 
     return direct_to_template(request, 'blog/post_detail.html',
@@ -36,7 +36,7 @@ def show_post(request, blog, post):
 
 def browse(request, blog_url):
     blog = get_object_or_404(Blog, base_url=blog_url)
-    query = Post.objects.filter(blog=blog)
+    query = Post.objects.filter(blog=blog, is_published=True)
     query = query.order_by('-date_published')
     return object_list(request, query, paginate_by=POSTS_PER_PAGE,
         extra_context={'blog': blog, 'recent_posts': query[:6],
