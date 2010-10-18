@@ -8,7 +8,7 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = ('name', 'email',)
 
 class PostAdmin(admin.ModelAdmin):
-    search_fields = ('title','author')
+    search_fields = ('title',)
     list_display = ('title', 'slug', 'author', 'body', 'is_published', 'tweet',)
     prepopulated_fields = {'slug': ('title',)}
     exclude = ('is_modified',) 
