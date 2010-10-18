@@ -1,9 +1,9 @@
 import utils
-from django import template 
-from django.contrib.sitemaps import ping_google, Sitemap
+from django import template
 from django.db import models
-from django.template.defaultfilters import slugify
 from django.conf import settings
+from django.contrib.sitemaps import ping_google, Sitemap
+from django.template.defaultfilters import slugify
 from datetime import datetime
 from taggit.managers import TaggableManager
 
@@ -37,7 +37,6 @@ def default_blog():
     return None
 
 class Post(models.Model):
-    date_published = models.DateTimeField(auto_now=True) 
     blog = models.ForeignKey(Blog, related_name='posts',
         default=default_blog,
         help_text='Changing this will affect URIs!')
@@ -45,6 +44,7 @@ class Post(models.Model):
     slug = models.SlugField(unique_for_date='date_published')
     author = models.ForeignKey(Author)
     body = models.TextField(blank=True)
+    date_published = models.DateTimeField(auto_now_add=True)    
     is_published = models.BooleanField('Published', help_text='Mark here to publish',)
     is_modified = models.BooleanField(default=False)
     tags = TaggableManager()
