@@ -1,11 +1,11 @@
-import re
+import utils
+from django import template 
 from django.contrib.sitemaps import ping_google, Sitemap
-from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
-from taggit.managers import TaggableManager
-import utils
 from django.conf import settings
+from datetime import datetime
+from taggit.managers import TaggableManager
 
 class Author(models.Model):
     name = models.CharField(max_length=64)
@@ -37,6 +37,7 @@ def default_blog():
     return None
 
 class Post(models.Model):
+    date_published = models.DateTimeField(auto_now=True) 
     blog = models.ForeignKey(Blog, related_name='posts',
         default=default_blog,
         help_text='Changing this will affect URIs!')
@@ -44,18 +45,18 @@ class Post(models.Model):
     slug = models.SlugField(unique_for_date='date_published')
     author = models.ForeignKey(Author)
     body = models.TextField(blank=True)
-    is_published = models.BooleanField('Published', help_text='Mark here to publish')
-    date_published = models.DateTimeField(auto_now=True)
-    date_modified = None
+    is_published = models.BooleanField('Published', help_text='Mark here to publish',)
+    is_modified = models.BooleanField(default=False)
     tags = TaggableManager()
-    tweet = models.BooleanField('Tweet', help_text='Mark here to Tweet')
+    tweet = models.BooleanField('Tweet', help_text='Mark here to Tweet',)  
     
     def save(self, *args, **kwargs):
-        if self.date_modified is None and self.is_published is True and self.tweet is True:
+        if self.date_published is None:
+            self.date_published = datetime.now() #if the date isn't set it needs to be set now or get_absolute_url() breaks
+        if self.is_published is True and self.is_modified is False and self.tweet is True:
             absolute_url = settings.SITE_URL + self.get_absolute_url()
             utils.tweet(self.title.encode(), absolute_url)
-        if self.date_published is not None and self.is_published is True:
-            self.date_modified = datetime.now()
+            self.is_modified = True
         super(Post, self).save(*args, **kwargs)
         try:
              ping_google(sitemap_url='/sitemap.xml')
@@ -85,4 +86,5 @@ class PostsSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.date_modified
+
 
