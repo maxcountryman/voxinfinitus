@@ -1,10 +1,9 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
-import views
 from blog.models import Post, PostsSitemap
-from blog.views import comment_posted
-import taggit
 from django.contrib.sitemaps import FlatPageSitemap 
+import views
+import taggit
 
 sitemaps = { 
      'flatpages': FlatPageSitemap,
@@ -19,8 +18,6 @@ urlpatterns = patterns('',
       (r'^admin/', include(admin.site.urls)),
       (r'^grappelli/', include('grappelli.urls')),
       (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-      (r'^comments/posted/$', 'blog.views.comment_posted'),
-      (r'^comments/', include('django.contrib.comments.urls')),
       (r'^blog/', include('blog.urls')),
       (r'^tag/(?P<slug>[^/]+)/$', 'taggit.views.tagged_object_list', 
             dict(queryset=Post.objects.all(),template_name='taggit/post_list.html')),
