@@ -1,6 +1,5 @@
 {% load markup %}
 {% load disqus_tags %}
-{% load blog %}
 {% if settings.DEGBUG %}{% disqus_dev %}{% endif %}
 <div class="post-date">{{ post.date_published|date }} {% if not browse_posts %}[<a href="{{ object.get_absolute_url }}#disqus_thread">Comments</a>]{% disqus_num_replies %}{% endif %}</div>
 <h2 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
