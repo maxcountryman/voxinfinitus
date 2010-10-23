@@ -1,5 +1,6 @@
 {% load markup %}
 {% load disqus_tags %}
+{% load blog %}
 {% if settings.DEGBUG %}{% disqus_dev %}{% endif %}
 <div class="post-date">{{ post.date_published|date }} {% if not browse_posts %}[<a href="{{ object.get_absolute_url }}#disqus_thread">Comments</a>]{% disqus_num_replies %}{% endif %}</div>
 <h2 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
@@ -15,7 +16,7 @@
 {% endif %}
 
 {% if browse_posts or object_list %}
-<p>{{ post.body|safe|truncatewords_html:50 }} <a href="{{ post.get_absolute_url }}">continue reading</a></p>
+<p>{{ post.body|safe|truncatewords_html:24 }} <a href="{{ post.get_absolute_url }}">continue reading</a></p>
 {% else %}
-{{ post.body|markdown }}
+{{ post.body|markdown}}
 {% endif %}
